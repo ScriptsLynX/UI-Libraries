@@ -925,7 +925,7 @@ function Library:AddWindow(WindowTable)
 
                 randomid = tostring(math.random(200,2000))
 
-                StarterBind..randomid = game:GetService("UserInputService").InputBegan:Connect(function(Key)
+                tostring(StarterBind..randomid) = game:GetService("UserInputService").InputBegan:Connect(function(Key)
                     if Key.KeyCode == CurrentBind then
                         pcall(task.spawn, Callback)
                         print("Starter Bind")
@@ -936,11 +936,11 @@ function Library:AddWindow(WindowTable)
                     KeyBinder.Text = "..."
                     CurrentBind = nil
                     if NewBind..randomid ~= nil then
-                        NewBind..randomid:Disconnect()
+                        tostring(NewBind..randomid):Disconnect()
                         print("Disconected new bind")
                     end
-                    if StarterBind..randomid ~= nil then
-                        StarterBind..randomid:Disconnect()
+                    if tostring(StarterBind..randomid) ~= nil then
+                        tostring(StarterBind..randomid):Disconnect()
                         print("Disconected StarterBind")
                     end
                     
@@ -951,7 +951,7 @@ function Library:AddWindow(WindowTable)
                             KeyBinder.Text = input.KeyCode.Name
                             Keybinding:Disconnect()
 
-                            NewBind..randomid = UIS.InputBegan:Connect(function(Key)
+                            tostring(NewBind..randomid) = UIS.InputBegan:Connect(function(Key)
                                 if Key.KeyCode == CurrentBind then
                                     pcall(task.spawn, Callback)
                                     print("NewBind")
