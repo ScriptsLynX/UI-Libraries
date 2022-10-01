@@ -923,7 +923,9 @@ function Library:AddWindow(WindowTable)
                     Tween:Create(KeyBind, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(29, 29, 29)}):Play()
                 end)
 
-                local StarterBind = game:GetService("UserInputService").InputBegan:Connect(function(Key)
+                randomid = tostring(math.random(200,2000))
+
+                StarterBind..randomid = game:GetService("UserInputService").InputBegan:Connect(function(Key)
                     if Key.KeyCode == CurrentBind then
                         pcall(task.spawn, Callback)
                         print("Starter Bind")
@@ -933,12 +935,12 @@ function Library:AddWindow(WindowTable)
                 KeyBinder.MouseButton1Click:Connect(function()
                     KeyBinder.Text = "..."
                     CurrentBind = nil
-                    if NewBind ~= nil then
-                        NewBind:Disconnect()
+                    if NewBind..randomid ~= nil then
+                        NewBind..randomid:Disconnect()
                         print("Disconected new bind")
                     end
-                    if StarterBind ~= nil then
-                        StarterBind:Disconnect()
+                    if StarterBind..randomid ~= nil then
+                        StarterBind..randomid:Disconnect()
                         print("Disconected StarterBind")
                     end
                     
@@ -949,7 +951,7 @@ function Library:AddWindow(WindowTable)
                             KeyBinder.Text = input.KeyCode.Name
                             Keybinding:Disconnect()
 
-                            NewBind = UIS.InputBegan:Connect(function(Key)
+                            NewBind..randomid = UIS.InputBegan:Connect(function(Key)
                                 if Key.KeyCode == CurrentBind then
                                     pcall(task.spawn, Callback)
                                     print("NewBind")
