@@ -927,7 +927,7 @@ function Library:AddWindow(WindowTable)
                 NewBind = game:GetService("UserInputService").InputBegan:Connect(function(Key)
                     if Key.KeyCode == CurrentBind then
                         pcall(task.spawn, Callback)
-                        print("WHAT42424")
+                        print("Starter Bind")
                     end
                 end)
 
@@ -936,13 +936,17 @@ function Library:AddWindow(WindowTable)
                     CurrentBind = nil
                     if NewBind ~= nil then
                         NewBind:Disconnect()
-                        if NewBind ~= nil then
-                            NewBind:Disconnect()
-                            if NewBind ~= nil then
-                                NewBind:Disconnect()
-                            end
-                        end
+                        print("Disconected")
                     end
+                    if NewBind ~= nil then
+                        NewBind:Disconnect()
+                        print("Disconected")
+                    end
+                    if NewBind ~= nil then
+                        NewBind:Disconnect()
+                        print("Disconected")
+                    end
+                    
 
                     Keybinding = UIS.InputBegan:Connect(function(input, gameProcessed)
 						if not gameProcessed and input.UserInputType == Enum.UserInputType.Keyboard then
@@ -959,7 +963,7 @@ function Library:AddWindow(WindowTable)
                     NewBind = UIS.InputBegan:Connect(function(Key)
 						if Key.KeyCode == CurrentBind then
                             pcall(task.spawn, Callback)
-                            print("WHAT12")
+                            print("NewBind")
                         end
 					end)
                 end)
