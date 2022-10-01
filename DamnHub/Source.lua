@@ -6,7 +6,7 @@ local UIS = game:GetService("UserInputService")
 
 for i,v in pairs(game.CoreGui:GetChildren()) do
     if v.Name == "DamnHub" and v.Enabled == true then
-        Tween:Create(v.MainFrame, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(1.5, 0, 0, v.MainFrame.Position.Y.Offset)}):Play()
+        Tween:Create(v.MainFrame, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(1.5, 0, 0.5, 0)}):Play()
         wait(1.1)
         v:Destroy()
     end
