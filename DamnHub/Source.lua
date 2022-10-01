@@ -927,6 +927,7 @@ function Library:AddWindow(WindowTable)
                 NewBind = game:GetService("UserInputService").InputBegan:Connect(function(Key)
                     if Key.KeyCode == CurrentBind then
                         pcall(task.spawn, Callback)
+                        print("WHAT42424")
                     end
                 end)
 
@@ -952,6 +953,7 @@ function Library:AddWindow(WindowTable)
                     NewBind = game:GetService("UserInputService").InputBegan:Connect(function(Key)
 						if Key.KeyCode == CurrentBind then
                             pcall(task.spawn, Callback)
+                            print("WHAT12")
                         end
 					end)
                 end)
