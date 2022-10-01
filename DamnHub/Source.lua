@@ -924,7 +924,7 @@ function Library:AddWindow(WindowTable)
                     Tween:Create(KeyBind, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(29, 29, 29)}):Play()
                 end)
 
-                NewBind = game:GetService("UserInputService").InputBegan:Connect(function(Key)
+                local NewBind = game:GetService("UserInputService").InputBegan:Connect(function(Key)
                     if Key.KeyCode == CurrentBind then
                         pcall(task.spawn, Callback)
                         print("WHAT42424")
@@ -934,11 +934,11 @@ function Library:AddWindow(WindowTable)
                 KeyBinder.MouseButton1Click:Connect(function()
                     KeyBinder.Text = "..."
                     CurrentBind = nil
-                    if NewBind then
+                    if NewBind ~= nil then
                         NewBind:Disconnect()
                     end
 
-                    Keybinding = game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
+                    Keybinding = UIS.InputBegan:Connect(function(input, gameProcessed)
 						if not gameProcessed and input.UserInputType == Enum.UserInputType.Keyboard then
 							CurrentBind = input.KeyCode
                             KeyBinder.Text = input.KeyCode.Name
@@ -950,7 +950,7 @@ function Library:AddWindow(WindowTable)
 						end
                     end)
 
-                    NewBind = game:GetService("UserInputService").InputBegan:Connect(function(Key)
+                    local NewBind = UIS.InputBegan:Connect(function(Key)
 						if Key.KeyCode == CurrentBind then
                             pcall(task.spawn, Callback)
                             print("WHAT12")
