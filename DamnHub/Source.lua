@@ -858,8 +858,7 @@ function Library:AddWindow(WindowTable)
                 BindText = BindText or "KeyBind"
                 BindSettings = BindSettings or {}
                 Callback = Callback or function() end
-                CurrentBind = BindSettings.StarterBind or nil
-                BindSettings.StarterBind = BindSettings.StarterBind or nil
+                CurrentBind = BindSettings.StarterBind
                 
                 local KeyBind = Instance.new("Frame")
                 local KBCorner = Instance.new("UICorner")
@@ -908,7 +907,7 @@ function Library:AddWindow(WindowTable)
                 KBTCorner.CornerRadius = UDim.new(0, 5)
                 KBTCorner.Name = "KBTCorner"
                 KBTCorner.Parent = KeyBinder
-
+                
                 if BindSettings.StarterBind ~= nil then
                     KeyBinder.Text = BindSettings.StarterBind.Name
                 else
@@ -924,7 +923,7 @@ function Library:AddWindow(WindowTable)
                     Tween:Create(KeyBind, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(29, 29, 29)}):Play()
                 end)
 
-                NewBind = game:GetService("UserInputService").InputBegan:Connect(function(Key)
+                StarterBind = game:GetService("UserInputService").InputBegan:Connect(function(Key)
                     if Key.KeyCode == CurrentBind then
                         pcall(task.spawn, Callback)
                         print("Starter Bind")
@@ -936,15 +935,11 @@ function Library:AddWindow(WindowTable)
                     CurrentBind = nil
                     if NewBind ~= nil then
                         NewBind:Disconnect()
-                        print("Disconected")
+                        print("Disconected new bind")
                     end
-                    if NewBind ~= nil then
-                        NewBind:Disconnect()
-                        print("Disconected")
-                    end
-                    if NewBind ~= nil then
-                        NewBind:Disconnect()
-                        print("Disconected")
+                    if StarterBind ~= nil then
+                        StarterBind:Disconnect()
+                        print("Disconected StarterBind")
                     end
                     
 
@@ -953,19 +948,19 @@ function Library:AddWindow(WindowTable)
 							CurrentBind = input.KeyCode
                             KeyBinder.Text = input.KeyCode.Name
                             Keybinding:Disconnect()
+
+                            NewBind = UIS.InputBegan:Connect(function(Key)
+                                if Key.KeyCode == CurrentBind then
+                                    pcall(task.spawn, Callback)
+                                    print("NewBind")
+                                end
+                            end)
                         else
                             KeyBinder.Text = "None"
                             CurrentBind = nil
                             Keybinding:Disconnect()
 						end
                     end)
-
-                    NewBind = UIS.InputBegan:Connect(function(Key)
-						if Key.KeyCode == CurrentBind then
-                            pcall(task.spawn, Callback)
-                            print("NewBind")
-                        end
-					end)
                 end)
 
                 UpdateSection()
