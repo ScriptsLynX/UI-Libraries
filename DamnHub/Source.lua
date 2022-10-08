@@ -912,7 +912,7 @@ function Library:AddWindow(WindowTable)
                     KeyBinder.Text = BindSettings.StarterBind.Name
                 else
                     KeyBinder.Text = "None"
-                    local CurrentBind = nil
+                    CurrentBind = nil
                 end
 
                 KeyBind.MouseEnter:Connect(function()
@@ -923,7 +923,7 @@ function Library:AddWindow(WindowTable)
                     Tween:Create(KeyBind, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(29, 29, 29)}):Play()
                 end)
 
-                local StarterBind = game:GetService("UserInputService").InputBegan:Connect(function(Key)
+                StarterBind = game:GetService("UserInputService").InputBegan:Connect(function(Key)
                     if Key.KeyCode == CurrentBind then
                         pcall(task.spawn, Callback)
                         print("Starter Bind")
@@ -932,7 +932,7 @@ function Library:AddWindow(WindowTable)
 
                 KeyBinder.MouseButton1Click:Connect(function()
                     KeyBinder.Text = "..."
-                    local CurrentBind = nil
+                    CurrentBind = nil
                     if NewBind ~= nil then
                         NewBind:Disconnect()
                         print("Disconected new bind")
@@ -948,7 +948,7 @@ function Library:AddWindow(WindowTable)
 							CurrentBind = input.KeyCode
                             KeyBinder.Text = input.KeyCode.Name
 
-                            local NewBind = UIS.InputBegan:Connect(function(Key)
+                            NewBind = UIS.InputBegan:Connect(function(Key)
                                 if Key.KeyCode == CurrentBind then
                                     pcall(task.spawn, Callback)
                                     print("NewBind")
