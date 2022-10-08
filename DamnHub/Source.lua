@@ -857,8 +857,8 @@ function Library:AddWindow(WindowTable)
             function Things:AddBind(BindText,BindSettings,Callback)
                 BindText = BindText or "KeyBind"
                 BindSettings = BindSettings or {}
-                Callback = Callback or function() end
-                CurrentBind = BindSettings.StarterBind
+                local Callback = Callback or function() end
+                local CurrentBind = BindSettings.StarterBind
                 
                 local KeyBind = Instance.new("Frame")
                 local KBCorner = Instance.new("UICorner")
@@ -912,7 +912,7 @@ function Library:AddWindow(WindowTable)
                     KeyBinder.Text = BindSettings.StarterBind.Name
                 else
                     KeyBinder.Text = "None"
-                    CurrentBind = nil
+                    local CurrentBind = nil
                 end
 
                 KeyBind.MouseEnter:Connect(function()
@@ -923,9 +923,7 @@ function Library:AddWindow(WindowTable)
                     Tween:Create(KeyBind, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(29, 29, 29)}):Play()
                 end)
 
-                randomid = tostring(math.random(200,2000))
-
-                tostring(StarterBind..randomid) = game:GetService("UserInputService").InputBegan:Connect(function(Key)
+                local StarterBind = game:GetService("UserInputService").InputBegan:Connect(function(Key)
                     if Key.KeyCode == CurrentBind then
                         pcall(task.spawn, Callback)
                         print("Starter Bind")
@@ -934,13 +932,13 @@ function Library:AddWindow(WindowTable)
 
                 KeyBinder.MouseButton1Click:Connect(function()
                     KeyBinder.Text = "..."
-                    CurrentBind = nil
-                    if NewBind..randomid ~= nil then
-                        tostring(NewBind..randomid):Disconnect()
+                    local CurrentBind = nil
+                    if NewBind ~= nil then
+                        NewBind:Disconnect()
                         print("Disconected new bind")
                     end
-                    if tostring(StarterBind..randomid) ~= nil then
-                        tostring(StarterBind..randomid):Disconnect()
+                    if StarterBind ~= nil then
+                        StarterBind:Disconnect()
                         print("Disconected StarterBind")
                     end
                     
@@ -949,14 +947,15 @@ function Library:AddWindow(WindowTable)
 						if not gameProcessed and input.UserInputType == Enum.UserInputType.Keyboard then
 							CurrentBind = input.KeyCode
                             KeyBinder.Text = input.KeyCode.Name
-                            Keybinding:Disconnect()
 
-                            tostring(NewBind..randomid) = UIS.InputBegan:Connect(function(Key)
+                            local NewBind = UIS.InputBegan:Connect(function(Key)
                                 if Key.KeyCode == CurrentBind then
                                     pcall(task.spawn, Callback)
                                     print("NewBind")
                                 end
                             end)
+
+                            Keybinding:Disconnect()
                         else
                             KeyBinder.Text = "None"
                             CurrentBind = nil
